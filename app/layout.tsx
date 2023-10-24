@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeContextProvider } from './context/ThemeContext';
+import ThemeProvider from './providers/ThemeProvider';
 import Header from './components/Header';
 import Footer from './components/Footer';
 
@@ -18,12 +20,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} min-h-screen flex flex-col px-10 py-2`}
-      >
-        <Header />
-        {children}
-        <Footer />
+      <body className={`${inter.className}`}>
+        <ThemeContextProvider>
+          <ThemeProvider>
+            <div className="flex min-h-screen flex-col px-2 py-10">
+              <Header />
+              {children}
+              <Footer />
+            </div>
+          </ThemeProvider>
+        </ThemeContextProvider>
       </body>
     </html>
   );
