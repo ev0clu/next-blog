@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={`${inter.className}`}>
         <ThemeContextProvider>
           <ThemeProvider>
-            <div className="flex min-h-screen flex-col px-2 py-10">
+            <div className="flex min-h-screen flex-col px-6 pb-2 pt-5">
               <Header />
               {children}
               <Footer />
