@@ -1,18 +1,20 @@
-import Image from 'next/image';
-import logo from '../../public/next.svg';
-import Navbar from './Navbar';
 import Link from 'next/link';
+import ThemeToggle from './ThemeToggle';
+import Navbar from './Navbar';
 
 const Header = () => {
   return (
-    <div className="flex flex-row gap-2 justify-between items-center">
-      <Link href="/" className="flex flex-row gap-2">
-        <Image src={logo} width={96} height={36} alt="Logo" />
-        <span className="text-2xl h-9 flex flex-row items-end">
-          Blog
-        </span>
+    <div className="flex flex-row items-center justify-between gap-2">
+      <Link
+        href="/"
+        className="bg-gradient-to-r from-teal-500 to-indigo-400 bg-clip-text text-3xl font-extrabold text-transparent"
+      >
+        WebDev Blog
       </Link>
-      <Navbar />
+      <div className="flex flex-row items-center gap-2">
+        <ThemeToggle />
+        <Navbar />
+      </div>
     </div>
   );
 };

@@ -1,6 +1,12 @@
+'use client';
+
+import React, { useContext } from 'react';
+import { ThemeContext } from '@/context/ThemeContext';
 import { FaGithub } from 'react-icons/fa';
 
 const Footer = () => {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <footer className="flex h-8 w-full flex-row items-center justify-center gap-2">
       <p>Copyright © Laszlo Kis 2023</p>
@@ -10,7 +16,13 @@ const Footer = () => {
         target="_blank"
         rel="noreferrer"
       >
-        <FaGithub />
+        <FaGithub
+          className={`${
+            theme === 'light'
+              ? 'text-neutral-950'
+              : 'text-neutral-100'
+          }`}
+        />
       </a>
     </footer>
   );
