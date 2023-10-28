@@ -1,10 +1,25 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
-import prisma from '@/lib/db';
+import prisma from '@/prisma/client';
+import { z } from 'zod';
 
-export async function POST(request: Request) {
+const userSchema = z.object({
+  username: z.string().min(1, 'Username is required').max(10).trim(),
+  email: z
+    .string()
+    .min(1, 'Email is required')
+    .email('Invalid email')
+    .trim(),
+  password: z
+    .string()
+    .min(1, 'Password is required')
+    .min(3, 'Password must have min 3 characters')
+});
+
+export async function POST(req: Request) {
   try {
-    const { username, email, password } = await request.json();
+    const body = await req.json();
+    const { username, email, password } = userSchema.parse(body);
 
     const existUserByName = await prisma.user.findUnique({
       where: {
@@ -64,7 +79,7 @@ export async function POST(request: Request) {
   } catch (error) {
     return NextResponse.json(
       {
-        message: 'Something went wrong'
+        message: error
       },
       { status: 500 }
     );
