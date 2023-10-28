@@ -1,65 +1,149 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useState, useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
 import { ThemeContext } from '@/context/ThemeContext';
+import ErrorMessage from '@/components/ErrorMessage';
+import Spinner from '@/components/Spinner';
+
+const formSchema = z
+  .object({
+    username: z
+      .string()
+      .min(1, 'Username is required')
+      .max(10)
+      .trim(),
+    email: z
+      .string()
+      .min(1, 'Email is required')
+      .email('Invalid email')
+      .trim(),
+    password: z
+      .string()
+      .min(1, 'Password is required')
+      .min(3, 'Password must have min 3 characters'),
+    confirmPassword: z
+      .string()
+      .min(1, 'Password confirmation is required')
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    path: ['confirmPassword'],
+    message: 'Password do not match'
+  });
+
+type formType = z.infer<typeof formSchema>;
 
 const Register = () => {
   const { theme } = useContext(ThemeContext);
-  const [email, setEmail] = useState('');
+  const router = useRouter();
+  const [error, setError] = useState('');
+  const [isSubmitting, setSubmitting] = useState(false);
+  /*const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');*/
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<formType>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    }
+  });
+
+  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    try {
+      setSubmitting(true);
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          username: data.username,
+          email: data.email,
+          password: data.password
+        })
+      });
+      if (response.ok) {
+        router.push('/');
+      }
+    } catch (error) {
+      setError('An unexpected error is occured');
+      setSubmitting(false);
+    }
+  };
 
   return (
     <main className="flex flex-1 flex-col items-center">
-      <form className="mt-5 flex flex-col gap-3">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-5 flex flex-col gap-3"
+      >
+        <div className="flex flex-col">
+          <label htmlFor="username">Username</label>
+          <input
+            className="rounded px-2 py-1 text-slate-950"
+            type="text"
+            placeholder="Username"
+            {...register('username')}
+          />
+          <ErrorMessage>{errors.username?.message}</ErrorMessage>
+        </div>
         <div className="flex flex-col">
           <label htmlFor="email">Email</label>
           <input
             className="rounded px-2 py-1 text-slate-950"
-            name="email"
             type="email"
             placeholder="email@example.com"
-            value={email}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              setEmail(e.currentTarget.value)
-            }
+            {...register('email')}
           />
         </div>
+        <ErrorMessage>{errors.email?.message}</ErrorMessage>
         <div className="flex flex-col">
           <label htmlFor="password">Password</label>
           <input
             className="rounded px-2 py-1 text-slate-950"
-            name="password"
             type="password"
             placeholder="Password"
-            value={password}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              setPassword(e.currentTarget.value)
-            }
-          />
+            {...register('password')}
+          />{' '}
+          <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
-          <label htmlFor="confirm_password">Confirm Password</label>
+          <label htmlFor="confirmPassword">Confirm Password</label>
           <input
             className="rounded px-2 py-1 text-slate-950"
-            name="confirm_password"
             type="password"
             placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e: React.FormEvent<HTMLInputElement>) =>
-              setConfirmPassword(e.currentTarget.value)
-            }
+            {...register('confirmPassword')}
           />
+          <ErrorMessage>
+            {errors.confirmPassword?.message}
+          </ErrorMessage>
+          <ErrorMessage>{errors.root?.message}</ErrorMessage>
         </div>
         <button
           className={`${
             theme === 'light'
-              ? 'bg-slate-950 text-slate-100'
-              : 'bg-slate-100 text-slate-950'
-          } m-auto mt-2 w-20 rounded p-2`}
+              ? !isSubmitting
+                ? 'bg-slate-950 text-slate-100'
+                : 'bg-neutral-400 text-slate-950'
+              : !isSubmitting
+              ? 'bg-slate-100 text-slate-950'
+              : 'bg-neutral-400 text-slate-950'
+          } m-auto mt-2 flex flex-row items-center gap-2 rounded p-2`}
           type="submit"
+          disabled={isSubmitting}
         >
-          Register
+          Register{isSubmitting && <Spinner />}
         </button>
       </form>
     </main>
