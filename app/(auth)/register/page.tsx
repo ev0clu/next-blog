@@ -100,40 +100,52 @@ const Register = () => {
         <div className="flex flex-col">
           <label htmlFor="username">Username</label>
           <input
+            id="username"
+            autoComplete="username"
             className="rounded px-2 py-1 text-slate-950"
             type="text"
             placeholder="Username"
             {...register('username')}
+            name="username"
           />
           <ErrorMessage>{errors.username?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
           <label htmlFor="email">Email</label>
           <input
+            id="email"
+            autoComplete="email"
             className="rounded px-2 py-1 text-slate-950"
             type="email"
             placeholder="email@example.com"
             {...register('email')}
+            name="email"
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
           <label htmlFor="password">Password</label>
           <input
+            id="password"
+            autoComplete="off"
             className="rounded px-2 py-1 text-slate-950"
             type="password"
             placeholder="Password"
             {...register('password')}
+            name="password"
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
           <label htmlFor="confirmPassword">Confirm Password</label>
           <input
+            id="confirmPassword"
+            autoComplete="off"
             className="rounded px-2 py-1 text-slate-950"
             type="password"
             placeholder="Confirm Password"
             {...register('confirmPassword')}
+            name="confirmPassword"
           />
           <ErrorMessage>
             {errors.confirmPassword?.message}
