@@ -8,6 +8,7 @@ import { z } from 'zod';
 import { ThemeContext } from '@/context/ThemeContext';
 import ErrorMessage from '@/components/ErrorMessage';
 import Spinner from '@/components/Spinner';
+import Link from 'next/link';
 
 const formSchema = z
   .object({
@@ -73,7 +74,7 @@ const Register = () => {
         })
       });
       if (response.ok) {
-        router.push('/');
+        router.push('/api/auth/signin');
       }
     } catch (error) {
       setError('An unexpected error is occured');
@@ -83,6 +84,7 @@ const Register = () => {
 
   return (
     <main className="flex flex-1 flex-col items-center">
+      {error && <ErrorMessage>{error}</ErrorMessage>}
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="mt-5 flex flex-col gap-3"
@@ -105,8 +107,8 @@ const Register = () => {
             placeholder="email@example.com"
             {...register('email')}
           />
+          <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </div>
-        <ErrorMessage>{errors.email?.message}</ErrorMessage>
         <div className="flex flex-col">
           <label htmlFor="password">Password</label>
           <input
@@ -114,7 +116,7 @@ const Register = () => {
             type="password"
             placeholder="Password"
             {...register('password')}
-          />{' '}
+          />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
@@ -130,6 +132,12 @@ const Register = () => {
           </ErrorMessage>
           <ErrorMessage>{errors.root?.message}</ErrorMessage>
         </div>
+        <p>
+          Already have an account?{' '}
+          <Link className="text-blue-500 underline" href="/login">
+            Log in
+          </Link>
+        </p>
         <button
           className={`${
             theme === 'light'
