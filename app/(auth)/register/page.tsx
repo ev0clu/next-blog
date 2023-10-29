@@ -75,6 +75,14 @@ const Register = () => {
       });
       if (response.ok) {
         router.push('/api/auth/signin');
+      } else {
+        setSubmitting(false);
+        const body = await response.json();
+        if (body.message) {
+          setError(body.message);
+        } else {
+          setError('An unexpected error occurred');
+        }
       }
     } catch (error) {
       setError('An unexpected error is occured');
