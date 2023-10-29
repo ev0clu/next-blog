@@ -9,6 +9,7 @@ import { ThemeContext } from '@/context/ThemeContext';
 import ErrorMessage from '@/components/ErrorMessage';
 import Spinner from '@/components/Spinner';
 import Link from 'next/link';
+import { signIn } from 'next-auth/react';
 
 const formSchema = z.object({
   email: z
@@ -49,16 +50,20 @@ const Login = () => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       setSubmitting(true);
-      const response = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email: data.email,
-          password: data.password
-        })
+      const response = await signIn('credentials', {
+        email: data.email,
+        password: data.password,
+        redirect: false
       });
-      if (response.ok) {
+      if (response?.ok) {
         router.push('/');
+      } else {
+        setSubmitting(false);
+        if (response?.error) {
+          setError(response.error);
+        } else {
+          setError('An unexpected error occurred');
+        }
       }
     } catch (error) {
       setError('An unexpected error is occured');
@@ -76,20 +81,26 @@ const Login = () => {
         <div className="flex flex-col">
           <label htmlFor="email">Email</label>
           <input
+            id="email"
+            autoComplete="email"
             className="rounded px-2 py-1 text-slate-950"
             type="email"
             placeholder="email@example.com"
             {...register('email')}
+            name="email"
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </div>
         <div className="flex flex-col">
           <label htmlFor="password">Password</label>
           <input
+            id="password"
+            autoComplete="off"
             className="rounded px-2 py-1 text-slate-950"
             type="password"
             placeholder="Password"
             {...register('password')}
+            name="password"
           />{' '}
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
