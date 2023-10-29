@@ -77,7 +77,7 @@ const Navbar = () => {
               Profile
             </Link>
             <Link
-              href="/"
+              href="/api/auth/signout"
               className={`${
                 theme == 'light'
                   ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
