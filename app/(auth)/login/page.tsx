@@ -57,13 +57,10 @@ const Login = () => {
       });
       if (response?.ok) {
         router.push('/');
-      } else {
+      }
+      if (response?.error) {
         setSubmitting(false);
-        if (response?.error) {
-          setError(response.error);
-        } else {
-          setError('An unexpected error occurred');
-        }
+        setError(`${response.status}: Email or password is wrong`);
       }
     } catch (error) {
       setError('An unexpected error is occured');
