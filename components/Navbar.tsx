@@ -10,12 +10,14 @@ import React, {
   useRef
 } from 'react';
 import { FiMenu } from 'react-icons/fi';
+import { signOut, useSession } from 'next-auth/react';
 
 const Navbar = () => {
   const { theme } = useContext(ThemeContext);
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
+  const { data: session, status } = useSession();
 
   useEffect(() => {
     // only add the event listener when the dropdown is opened
@@ -35,13 +37,11 @@ const Navbar = () => {
     };
   }, [toggleDropdown]);
 
-  const isLoggedIn = false;
-
   return (
     <nav className="flex flex-row items-center">
       {/* Desktop Navigation */}
       <div className="hidden gap-2 sm:flex">
-        {!isLoggedIn ? (
+        {!session?.user ? (
           <>
             <Link
               href="/login"
@@ -101,7 +101,7 @@ const Navbar = () => {
             ref={dropdownRef}
             className="absolute right-0 top-7 flex w-max flex-col items-start gap-2 rounded bg-slate-100 p-1 px-4 py-2 text-sm text-slate-950"
           >
-            {!isLoggedIn ? (
+            {!session?.user ? (
               <>
                 <button
                   type="button"
@@ -123,15 +123,29 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <button
-                type="button"
-                onClick={() => {
-                  router.push('/');
-                  setToggleDropdown(false);
-                }}
-              >
-                Log out
-              </button>
+              <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push('/profile');
+                    setToggleDropdown(false);
+                  }}
+                >
+                  Profile
+                </button>
+                <button
+                  type="button"
+                  onClick={async () => {
+                    await signOut({
+                      redirect: true,
+                      callbackUrl: '/'
+                    });
+                    setToggleDropdown(false);
+                  }}
+                >
+                  Log out
+                </button>
+              </>
             )}
           </div>
         )}
