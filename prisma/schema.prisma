@@ -41,7 +41,7 @@ model User {
   id        String    @id @default(cuid()) @map("_id")
   username  String    @unique
   password  String
-  email     String?   @unique
+  email     String    @unique
   image     String?
   role      Role      @default(USER)
   createdAt DateTime  @default(now())
