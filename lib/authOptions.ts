@@ -3,9 +3,10 @@ import prisma from '@/prisma/client';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { compare } from 'bcrypt';
 import { NextAuthOptions } from 'next-auth';
+import { Adapter } from 'next-auth/adapters';
 
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prisma) as Adapter,
   session: { strategy: 'jwt' },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
@@ -52,7 +53,7 @@ export const authOptions: NextAuthOptions = {
           return null;
         }
 
-        const passwordMatch = compare(
+        const passwordMatch = await compare(
           credentials.password,
           existUserByEmail.password
         );
