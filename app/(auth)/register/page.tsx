@@ -74,7 +74,7 @@ const Register = () => {
         })
       });
       if (response.ok) {
-        router.push('/api/auth/signin');
+        router.push('/login');
       } else {
         setSubmitting(false);
         const body = await response.json();
