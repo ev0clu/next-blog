@@ -66,7 +66,8 @@ export const authOptions: NextAuthOptions = {
         return {
           id: existUserByEmail.id,
           username: existUserByEmail.username,
-          email: existUserByEmail.email
+          email: existUserByEmail.email,
+          role: existUserByEmail.role
         };
       }
     })
@@ -76,7 +77,8 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         return {
           ...token,
-          username: user.username
+          username: user.username,
+          role: user.role
         };
       }
       return token;
@@ -86,7 +88,8 @@ export const authOptions: NextAuthOptions = {
         ...session,
         user: {
           ...session.user,
-          username: token.username
+          username: token.username,
+          role: token.role
         }
       };
     }
