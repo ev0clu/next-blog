@@ -76,16 +76,23 @@ const Navbar = () => {
             >
               Profile
             </Link>
-            <Link
-              href="/api/auth/signout"
+            <button
               className={`${
                 theme == 'light'
                   ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
                   : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
               } rounded-full py-2`}
+              type="button"
+              onClick={async () => {
+                await signOut({
+                  redirect: true,
+                  callbackUrl: '/'
+                });
+                setToggleDropdown(false);
+              }}
             >
               Log out
-            </Link>
+            </button>
           </>
         )}
       </div>
