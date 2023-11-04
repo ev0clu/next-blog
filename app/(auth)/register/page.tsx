@@ -63,6 +63,7 @@ const Register = () => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      setError('');
       setSubmitting(true);
       const response = await fetch('/api/auth/register', {
         method: 'POST',
@@ -106,7 +107,6 @@ const Register = () => {
             type="text"
             placeholder="Username"
             {...register('username')}
-            name="username"
           />
           <ErrorMessage>{errors.username?.message}</ErrorMessage>
         </div>
@@ -119,7 +119,6 @@ const Register = () => {
             type="email"
             placeholder="email@example.com"
             {...register('email')}
-            name="email"
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </div>
@@ -132,7 +131,6 @@ const Register = () => {
             type="password"
             placeholder="Password"
             {...register('password')}
-            name="password"
           />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
@@ -145,7 +143,6 @@ const Register = () => {
             type="password"
             placeholder="Confirm Password"
             {...register('confirmPassword')}
-            name="confirmPassword"
           />
           <ErrorMessage>
             {errors.confirmPassword?.message}

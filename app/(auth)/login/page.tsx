@@ -49,6 +49,7 @@ const Login = () => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      setError('');
       setSubmitting(true);
       const response = await signIn('credentials', {
         email: data.email,
@@ -84,7 +85,6 @@ const Login = () => {
             type="email"
             placeholder="email@example.com"
             {...register('email')}
-            name="email"
           />
           <ErrorMessage>{errors.email?.message}</ErrorMessage>
         </div>
@@ -97,8 +97,7 @@ const Login = () => {
             type="password"
             placeholder="Password"
             {...register('password')}
-            name="password"
-          />{' '}
+          />
           <ErrorMessage>{errors.password?.message}</ErrorMessage>
         </div>
         <p>
