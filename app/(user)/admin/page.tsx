@@ -77,7 +77,7 @@ const Admin = () => {
   return (
     <main className="mt-5 flex flex-1 flex-col items-center">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
+        <div className="flex flex-col justify-center">
           <h1 className="mb-5 text-3xl font-extrabold">
             Do you really want to be admin?
           </h1>
