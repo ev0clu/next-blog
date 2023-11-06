@@ -17,7 +17,7 @@ const Navbar = () => {
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement | null>(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   useEffect(() => {
     // only add the event listener when the dropdown is opened
