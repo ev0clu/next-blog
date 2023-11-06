@@ -17,12 +17,14 @@ const Profile = async () => {
         <p>
           <b>Role:</b> {session?.user.role}
         </p>
-        <p className="mt-3">
-          Do you want to be Admin?{' '}
-          <Link className="text-blue-500 underline" href="/admin">
-            Click here
-          </Link>
-        </p>
+        {session?.user.role !== 'ADMIN' && (
+          <p className="mt-3">
+            Do you want to be Admin?{' '}
+            <Link className="text-blue-500 underline" href="/admin">
+              Click here
+            </Link>
+          </p>
+        )}
       </div>
     </main>
   );
