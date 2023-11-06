@@ -11,8 +11,9 @@ datasource db {
 }
 
 model Account {
-  id                String  @id @default(cuid()) @map("_id")
-  userId            String
+  id                String  @id @default(cuid()) @map("_id") @db.ObjectId
+  username          String  @unique
+  userId            String  @db.ObjectId
   type              String
   provider          String
   providerAccountId String
@@ -30,23 +31,47 @@ model Account {
 }
 
 model Session {
-  id           String   @id @default(cuid()) @map("_id")
+  id           String   @id @default(cuid()) @map("_id") @db.ObjectId
+  username     String   @unique
   sessionToken String   @unique
-  userId       String
+  userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id        String    @id @default(cuid()) @map("_id")
+  id        String    @id @default(cuid()) @map("_id") @db.ObjectId
   username  String    @unique
   password  String
   email     String    @unique
   image     String?
   role      Role      @default(USER)
   createdAt DateTime  @default(now())
+  posts     Post[]
+  comments  Comment[]
   accounts  Account[]
   sessions  Session[]
+}
+
+model Post {
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  content   String
+  views     String
+  author    User      @relation(fields: [authorId], references: [id])
+  authorId  String    @db.ObjectId
+  createdAt DateTime  @default(now())
+  comments  Comment[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  content   String?
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String   @db.ObjectId
+  createdAt DateTime @default(now())
 }
 
 model VerificationToken {
