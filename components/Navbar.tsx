@@ -67,6 +67,16 @@ const Navbar = () => {
         ) : (
           <>
             <Link
+              href="/post/new"
+              className={`${
+                theme == 'light'
+                  ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
+                  : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
+              } rounded-full py-2`}
+            >
+              Add new post
+            </Link>
+            <Link
               href="/profile"
               className={`${
                 theme == 'light'
@@ -131,6 +141,15 @@ const Navbar = () => {
               </>
             ) : (
               <>
+                <button
+                  type="button"
+                  onClick={() => {
+                    router.push('/post/new');
+                    setToggleDropdown(false);
+                  }}
+                >
+                  Add new post
+                </button>
                 <button
                   type="button"
                   onClick={() => {
