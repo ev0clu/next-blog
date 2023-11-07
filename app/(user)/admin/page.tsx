@@ -75,42 +75,40 @@ const Admin = () => {
   };
 
   return (
-    <main className="mt-5 flex flex-1 flex-col items-center">
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex flex-col justify-center">
-          <h1 className="mb-5 text-3xl font-extrabold">
-            Do you really want to be admin?
-          </h1>
-          <p>You should answer to the following question.</p>
-          <p className="mt-5">
-            <b>How much is the π value by 4 digits?</b>
-          </p>
-          <input
-            className="rounded px-2 py-1 text-slate-950"
-            type="text"
-            placeholder="x.xxxx"
-            {...register('code')}
-          />
-          <ErrorMessage>{error}</ErrorMessage>
-          <ErrorMessage>{errors.code?.message}</ErrorMessage>
-        </div>
-        <button
-          className={`${
-            theme === 'light'
-              ? !isSubmitting
-                ? 'bg-slate-950 text-slate-100'
-                : 'bg-neutral-400 text-slate-950'
-              : !isSubmitting
-              ? 'bg-slate-100 text-slate-950'
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <div className="flex flex-col justify-center">
+        <h1 className="mb-5 text-3xl font-extrabold">
+          Do you really want to be admin?
+        </h1>
+        <p>You should answer to the following question.</p>
+        <p className="mt-5">
+          <b>How much is the π value by 4 digits?</b>
+        </p>
+        <input
+          className="rounded px-2 py-1 text-slate-950"
+          type="text"
+          placeholder="x.xxxx"
+          {...register('code')}
+        />
+        <ErrorMessage>{error}</ErrorMessage>
+        <ErrorMessage>{errors.code?.message}</ErrorMessage>
+      </div>
+      <button
+        className={`${
+          theme === 'light'
+            ? !isSubmitting
+              ? 'bg-slate-950 text-slate-100'
               : 'bg-neutral-400 text-slate-950'
-          } m-auto mt-2 flex flex-row items-center gap-2 rounded p-2`}
-          type="submit"
-          disabled={isSubmitting}
-        >
-          Update{isSubmitting && <Spinner />}
-        </button>
-      </form>
-    </main>
+            : !isSubmitting
+            ? 'bg-slate-100 text-slate-950'
+            : 'bg-neutral-400 text-slate-950'
+        } m-auto mt-2 flex flex-row items-center gap-2 rounded p-2`}
+        type="submit"
+        disabled={isSubmitting}
+      >
+        Update{isSubmitting && <Spinner />}
+      </button>
+    </form>
   );
 };
 

@@ -70,7 +70,7 @@ const Login = () => {
   };
 
   return (
-    <main className="flex flex-1 flex-col items-center">
+    <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -122,7 +122,7 @@ const Login = () => {
           Log in{isSubmitting && <Spinner />}
         </button>
       </form>
-    </main>
+    </>
   );
 };
 

@@ -92,7 +92,7 @@ const Register = () => {
   };
 
   return (
-    <main className="flex flex-1 flex-col items-center">
+    <>
       {error && <ErrorMessage>{error}</ErrorMessage>}
       <form
         onSubmit={handleSubmit(onSubmit)}
@@ -171,7 +171,7 @@ const Register = () => {
           Register{isSubmitting && <Spinner />}
         </button>
       </form>
-    </main>
+    </>
   );
 };
 
