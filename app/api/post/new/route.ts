@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 import { z } from 'zod';
+import { getServerSession } from 'next-auth';
+import { authOptions } from '@/lib/authOptions';
 
 const postSchema = z.object({
   title: z
@@ -14,6 +16,7 @@ const postSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const session = await getServerSession(authOptions);
 
     // Validation with safeParse
     const validation = postSchema.safeParse(body);
@@ -21,14 +24,25 @@ export async function POST(req: Request) {
       NextResponse.json(validation.error.format(), { status: 400 });
     }
 
-    /* const createPost = await prisma.post.create({
+    const user = await prisma.user.findUnique({
+      where: {
+        email: session?.user.email!
+      }
+    });
+
+    const createPost = await prisma.post.create({
       data: {
         title: body.title,
-        content: body.content
+        content: body.content,
+        author: {
+          connect: {
+            id: user?.id
+          }
+        }
       }
-    });*/
+    });
 
-    //const { password: newUserPassword, ...rest } = newUser;
+    console.log(createPost);
 
     return NextResponse.json(
       {
