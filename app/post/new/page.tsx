@@ -7,7 +7,7 @@ import {
 } from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import { useContext, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { ThemeContext } from '@/context/ThemeContext';
@@ -22,7 +22,7 @@ const formSchema = z.object({
     .min(1, 'Title is required')
     .max(10, 'Title must have less than 10 characters')
     .trim(),
-  content: z.string().min(1, 'Content is required')
+  content: z.string().min(1, 'Content is required').trim()
 });
 
 type formType = z.infer<typeof formSchema>;
@@ -45,6 +45,7 @@ const NewPost = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors }
   } = useForm<formType>({
     resolver: zodResolver(formSchema),
@@ -102,7 +103,22 @@ const NewPost = () => {
               />
               <ErrorMessage>{errors.title?.message}</ErrorMessage>
             </div>
-            <SimpleMdeReact options={editorOptions} />
+            <Controller
+              name="content"
+              control={control}
+              render={({ field }) => (
+                <SimpleMdeReact
+                  className={`${
+                    theme == 'light'
+                      ? 'text-slate-900'
+                      : 'text-slate-100'
+                  } prose prose-code:text-blue-500`}
+                  options={editorOptions}
+                  {...field}
+                />
+              )}
+            />
+            <ErrorMessage>{errors.content?.message}</ErrorMessage>
             <button
               className={`${
                 theme === 'light'
