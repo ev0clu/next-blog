@@ -12,6 +12,7 @@ export type UserProps = {
 export type PostProps = {
   id: string;
   title: string;
+  description: string;
   content: string;
   comments: [];
   views: string;

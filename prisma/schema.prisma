@@ -53,14 +53,15 @@ model User {
 }
 
 model Post {
-  id        String    @id @default(cuid()) @map("_id")
-  createdAt DateTime  @default(now())
-  title     String
-  content   String
-  views     String    @default("0")
-  author    User      @relation(fields: [authorId], references: [id])
-  authorId  String
-  comments  Comment[]
+  id          String    @id @default(cuid()) @map("_id")
+  createdAt   DateTime  @default(now())
+  title       String
+  description String
+  content     String
+  views       String    @default("0")
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]
 }
 
 model Comment {
