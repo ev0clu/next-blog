@@ -1,10 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import {
+/*import {
   SimpleMDEReactProps,
   SimpleMdeReact
-} from 'react-simplemde-editor';
+} from 'react-simplemde-editor';*/
+import dynamic from 'next/dynamic';
+const SimpleMdeReact = dynamic(
+  () => import('react-simplemde-editor'),
+  { ssr: false }
+);
+import { SimpleMDEReactProps } from 'react-simplemde-editor';
 import 'easymde/dist/easymde.min.css';
 import { useContext, useMemo, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
@@ -20,7 +26,12 @@ const formSchema = z.object({
   title: z
     .string()
     .min(1, 'Title is required')
-    .max(10, 'Title must have less than 10 characters')
+    .max(30, 'Title must have less than 30 characters')
+    .trim(),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(300, 'Description must have less than 300 characters')
     .trim(),
   content: z.string().min(1, 'Content is required').trim()
 });
@@ -34,7 +45,15 @@ const NewPost = () => {
   const [isSubmitting, setSubmitting] = useState(false);
   const { data: session } = useSession();
 
-  const editorOptions = useMemo(() => {
+  const descriptionEditorOptions = useMemo(() => {
+    return {
+      placeholder: 'Description',
+      hideIcons: ['fullscreen'],
+      sideBySideFullscreen: false
+    } as SimpleMDEReactProps;
+  }, []);
+
+  const contentEditorOptions = useMemo(() => {
     return {
       placeholder: 'Content',
       hideIcons: ['fullscreen'],
@@ -51,6 +70,7 @@ const NewPost = () => {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
+      description: '',
       content: ''
     }
   });
@@ -64,7 +84,9 @@ const NewPost = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           title: data.title,
-          content: data.content
+          description: data.description,
+          content: data.content,
+          email: session?.user.email
         })
       });
       if (response.ok) {
@@ -104,6 +126,22 @@ const NewPost = () => {
               <ErrorMessage>{errors.title?.message}</ErrorMessage>
             </div>
             <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <SimpleMdeReact
+                  className={`${
+                    theme == 'light'
+                      ? 'text-slate-900'
+                      : 'text-slate-100'
+                  } prose prose-code:text-blue-500`}
+                  options={descriptionEditorOptions}
+                  {...field}
+                />
+              )}
+            />
+            <ErrorMessage>{errors.description?.message}</ErrorMessage>
+            <Controller
               name="content"
               control={control}
               render={({ field }) => (
@@ -113,7 +151,7 @@ const NewPost = () => {
                       ? 'text-slate-900'
                       : 'text-slate-100'
                   } prose prose-code:text-blue-500`}
-                  options={editorOptions}
+                  options={contentEditorOptions}
                   {...field}
                 />
               )}
