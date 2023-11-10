@@ -14,7 +14,7 @@ export type PostProps = {
   title: string;
   description: string;
   content: string;
-  comments: [];
+  comments: CommentProps[];
   views: string;
   author: UserProps;
   createdAt: string;
