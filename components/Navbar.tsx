@@ -118,7 +118,7 @@ const Navbar = () => {
         {toggleDropdown && (
           <div
             ref={dropdownRef}
-            className="absolute right-0 top-7 flex w-max flex-col items-start gap-2 rounded bg-slate-100 p-1 px-4 py-2 text-sm text-slate-950"
+            className="absolute right-0 top-7 z-10 flex w-max flex-col items-start gap-2 rounded bg-slate-100 p-1 px-4 py-2 text-sm text-slate-950"
           >
             {!session?.user ? (
               <>
