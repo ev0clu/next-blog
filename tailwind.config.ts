@@ -8,7 +8,14 @@ const config: Config = {
     './providers/**/*.{js,ts,jsx,tsx,mdx}'
   ],
   theme: {
-    extend: {}
+    extend: {
+      minWidth: {
+        '300': '300px'
+      },
+      maxWidth: {
+        '1050': '1050px'
+      }
+    }
   },
   plugins: [require('@tailwindcss/typography')]
 };
