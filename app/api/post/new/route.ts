@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 import { z } from 'zod';
-import { getServerSession } from 'next-auth';
-import { authOptions } from '@/lib/authOptions';
 
 const postSchema = z.object({
   title: z
     .string()
     .min(1, 'Title is required')
-    .max(10, 'Title must have less than 10 characters')
+    .max(30, 'Title must have less than 30 characters')
+    .trim(),
+  description: z
+    .string()
+    .min(1, 'Description is required')
+    .max(300, 'Description must have less than 300 characters')
     .trim(),
   content: z.string().min(1, 'Content is required')
 });
@@ -16,7 +19,6 @@ const postSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const session = await getServerSession(authOptions);
 
     // Validation with safeParse
     const validation = postSchema.safeParse(body);
@@ -26,13 +28,14 @@ export async function POST(req: Request) {
 
     const user = await prisma.user.findUnique({
       where: {
-        email: session?.user.email!
+        email: body.email
       }
     });
 
     const createPost = await prisma.post.create({
       data: {
         title: body.title,
+        description: body.description,
         content: body.content,
         author: {
           connect: {
@@ -42,11 +45,13 @@ export async function POST(req: Request) {
       }
     });
 
-    console.log(createPost);
-
     return NextResponse.json(
       {
-        post: { title: body.title, content: body.content },
+        post: {
+          title: body.title,
+          description: body.description,
+          content: body.content
+        },
         message: 'Post created'
       },
       { status: 201 }
