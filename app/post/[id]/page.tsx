@@ -12,7 +12,6 @@ import { format } from 'date-fns';
 import NewComment from '@/components/NewComment';
 import PostComments from '@/components/PostComments';
 import ErrorMessage from '@/components/ErrorMessage';
-import { CommentProps } from 'types/post';
 import getNumberOfComments from '@/lib/getNumberOfComments';
 
 const Post = ({
@@ -22,7 +21,6 @@ const Post = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   const [post, setPost] = useState<PostProps>();
-  const [comments, setComments] = useState<CommentProps[]>([]);
   const [isNewComment, setIsNewComment] = useState(true);
   const [error, setError] = useState('');
   const { data: session } = useSession();
