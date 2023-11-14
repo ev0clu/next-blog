@@ -6,6 +6,15 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const updatePostViews = await prisma.post.update({
+      where: { id: params.id },
+      data: {
+        views: {
+          increment: 1
+        }
+      }
+    });
+
     const post = await prisma.post.findUnique({
       where: { id: params.id },
       include: {
