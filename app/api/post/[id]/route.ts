@@ -8,18 +8,19 @@ export async function GET(
   try {
     const post = await prisma.post.findUnique({
       where: { id: params.id },
-      include: { author: true }
-    });
-
-    const comments = await prisma.comment.findMany({
-      where: { postId: params.id },
-      include: { author: true }
+      include: {
+        author: true,
+        comments: {
+          include: {
+            author: true
+          }
+        }
+      }
     });
 
     return NextResponse.json(
       {
         post: post,
-        comments: comments,
         message: `Post id:${params.id} records are returned with comments`
       },
       { status: 201 }
