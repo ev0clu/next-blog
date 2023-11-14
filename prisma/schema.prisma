@@ -58,7 +58,7 @@ model Post {
   title       String
   description String
   content     String
-  views       String    @default("0")
+  views       Int       @default(0)
   author      User      @relation(fields: [authorId], references: [id])
   authorId    String
   comments    Comment[]
