@@ -52,7 +52,7 @@ export async function POST(req: Request) {
           description: body.description,
           content: body.content
         },
-        message: 'Post created'
+        message: 'Post is created'
       },
       { status: 201 }
     );
