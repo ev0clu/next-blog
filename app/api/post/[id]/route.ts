@@ -11,10 +11,16 @@ export async function GET(
       include: { author: true }
     });
 
+    const comments = await prisma.comment.findMany({
+      where: { postId: params.id },
+      include: { author: true }
+    });
+
     return NextResponse.json(
       {
         post: post,
-        message: `Post id:${params.id} records are returned`
+        comments: comments,
+        message: `Post id:${params.id} records are returned with comments`
       },
       { status: 201 }
     );
