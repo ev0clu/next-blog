@@ -11,6 +11,7 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import ErrorMessage from './ErrorMessage';
 import { format } from 'date-fns';
+import getNumberOfComments from '@/lib/getNumberOfComments';
 
 const PostCard = () => {
   const { theme } = useContext(ThemeContext);
@@ -96,7 +97,7 @@ const PostCard = () => {
                     <div className="flex flex-row items-center justify-end gap-4 pr-3 pt-3">
                       <div className="flex flex-row items-center gap-1 opacity-70">
                         <BiMessageRounded />
-                        {/*post.comments*/}
+                        {getNumberOfComments(post.comments)}
                       </div>
                       <div className="flex flex-row items-center gap-1 opacity-70">
                         <AiOutlineEye />
