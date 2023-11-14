@@ -27,6 +27,28 @@ const Post = ({
   const { id } = params;
 
   useEffect(() => {
+    const fetchDataUpdate = async () => {
+      try {
+        const response = await fetch(`/api/post/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        if (!response.ok) {
+          const res = await response.json();
+          setError(
+            `An unexpected error occurred. Error:${res.message}`
+          );
+        }
+      } catch (error) {
+        setError('An unexpected error is occured');
+      }
+    };
+
+    fetchDataUpdate();
+  }, []);
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch(`/api/post/${id}`, {
@@ -44,12 +66,11 @@ const Post = ({
         setError('An unexpected error is occured');
       }
     };
-
     if (isNewComment) {
       fetchData();
       setIsNewComment(false);
     }
-  }, [isNewComment, id]);
+  }, [isNewComment]);
 
   const handleNewCommentClick = () => {
     setIsNewComment(true);
@@ -120,8 +141,8 @@ const Post = ({
           </div>
         </div>
       ) : (
-        <div className="flex flex-1 flex-col items-center justify-center gap-2 text-center">
-          <p className="text-4xl font-bold">
+        <div className="my-10 flex flex-1 flex-col items-center justify-center gap-2 text-center">
+          <p className="text-xl font-bold">
             Post Id: {params.id} does not exist.
           </p>
         </div>
