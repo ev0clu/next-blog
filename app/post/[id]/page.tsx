@@ -66,6 +66,7 @@ const Post = ({
         setError('An unexpected error is occured');
       }
     };
+
     if (isNewComment) {
       fetchData();
       setIsNewComment(false);
@@ -130,13 +131,16 @@ const Post = ({
               </div>
             </div>
           </div>
+          {session?.user && (
+            <div>
+              <NewComment
+                postId={params.id}
+                handleNewCommentClick={handleNewCommentClick}
+              />
+            </div>
+          )}
           <div>
-            <NewComment
-              postId={params.id}
-              handleNewCommentClick={handleNewCommentClick}
-            />
-          </div>
-          <div>
+            <p className="text-xl font-bold underline">Comments</p>
             <PostComments comments={post.comments} />
           </div>
         </div>
