@@ -46,8 +46,8 @@ const PostCard = () => {
       {error ? (
         <ErrorMessage>{error}</ErrorMessage>
       ) : posts.length === 0 ? (
-        <div className="flex flex-1 flex-col items-center justify-center gap-2 text-center">
-          <p className="text-4xl font-bold">
+        <div className="my-10 flex flex-1 flex-col items-center justify-center gap-2 text-center">
+          <p className="text-xl font-bold">
             There is still no any post.
           </p>
           {session?.user.role === 'ADMIN' && (
