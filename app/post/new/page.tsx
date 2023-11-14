@@ -111,6 +111,7 @@ const NewPost = () => {
         <>
           {error && <ErrorMessage>{error}</ErrorMessage>}
           <form
+            id="new-page-form"
             onSubmit={handleSubmit(onSubmit)}
             className="mt-5 flex flex-col gap-3"
           >
