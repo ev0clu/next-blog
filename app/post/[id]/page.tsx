@@ -13,6 +13,7 @@ import NewComment from '@/components/NewComment';
 import PostComments from '@/components/PostComments';
 import ErrorMessage from '@/components/ErrorMessage';
 import { CommentProps } from 'types/post';
+import getNumberOfComments from '@/lib/getNumberOfComments';
 
 const Post = ({
   params
@@ -38,7 +39,6 @@ const Post = ({
         if (response.ok) {
           const data = await response.json();
           setPost(data.post);
-          setComments(data.comments);
         } else {
           setError('An unexpected error occurred');
         }
@@ -103,7 +103,7 @@ const Post = ({
             <div className="flex flex-row items-center justify-end gap-4 pr-3 pt-3">
               <div className="flex flex-row items-center gap-1 opacity-70">
                 <BiMessageRounded />
-                {/*post.comments*/}
+                {getNumberOfComments(post.comments)}
               </div>
               <div className="flex flex-row items-center gap-1 opacity-70">
                 <AiOutlineEye />
@@ -118,7 +118,7 @@ const Post = ({
             />
           </div>
           <div>
-            <PostComments comments={comments} />
+            <PostComments comments={post.comments} />
           </div>
         </div>
       ) : (
