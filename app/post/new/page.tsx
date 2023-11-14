@@ -137,6 +137,7 @@ const NewPost = () => {
                   } prose prose-code:text-blue-500`}
                   options={descriptionEditorOptions}
                   {...field}
+                  ref={null}
                 />
               )}
             />
@@ -153,6 +154,7 @@ const NewPost = () => {
                   } prose prose-code:text-blue-500`}
                   options={contentEditorOptions}
                   {...field}
+                  ref={null}
                 />
               )}
             />
