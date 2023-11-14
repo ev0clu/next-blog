@@ -25,9 +25,9 @@ export default function RootLayout({
         <AuthProvider>
           <ThemeContextProvider>
             <ThemeProvider>
-              <div className="flex min-h-screen flex-col px-6 pb-2 pt-5">
+              <div className="flex min-h-screen flex-col">
                 <Header />
-                <main className="mt-5 flex flex-1 flex-col items-center">
+                <main className="my-4 flex flex-1 flex-col items-center px-5">
                   {children}
                 </main>
                 <Footer />
