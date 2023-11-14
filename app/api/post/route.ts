@@ -4,7 +4,7 @@ import prisma from '@/prisma/client';
 export async function GET(req: Request) {
   try {
     const posts = await prisma.post.findMany({
-      include: { author: true }
+      include: { author: true, comments: true }
     });
 
     return NextResponse.json(
