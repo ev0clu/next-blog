@@ -57,7 +57,7 @@ const PostCard = () => {
         </div>
       ) : (
         <div className="flex flex-col justify-center">
-          <div className="min-w-300 max-w-1050 m-5 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div className="m-5 grid min-w-300 max-w-1050 grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
             {posts.map((post: PostProps) => {
               return (
                 <div
@@ -68,7 +68,7 @@ const PostCard = () => {
                   } flex flex-col justify-between rounded-lg border`}
                   key={post.id}
                 >
-                  <div className="gap-2S flex flex-col px-5 pt-5">
+                  <div className="flex flex-col gap-2 px-5 pt-5">
                     <div className="opacity-50">
                       {format(
                         new Date(post.createdAt),
