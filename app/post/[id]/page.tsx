@@ -13,6 +13,7 @@ import NewComment from '@/components/NewComment';
 import PostComments from '@/components/PostComments';
 import ErrorMessage from '@/components/ErrorMessage';
 import getNumberOfComments from '@/lib/getNumberOfComments';
+import Loading from '@/components/Loading';
 
 const Post = ({
   params
@@ -25,10 +26,12 @@ const Post = ({
   const [error, setError] = useState('');
   const { data: session } = useSession();
   const { id } = params;
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchDataUpdate = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch(`/api/post/${id}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' }
@@ -39,9 +42,11 @@ const Post = ({
           setError(
             `An unexpected error occurred. Error:${res.message}`
           );
+          setIsLoading(false);
         }
       } catch (error) {
         setError('An unexpected error is occured');
+        setIsLoading(false);
       }
     };
 
@@ -62,8 +67,10 @@ const Post = ({
         } else {
           setError('An unexpected error occurred');
         }
+        setIsLoading(false);
       } catch (error) {
         setError('An unexpected error is occured');
+        setIsLoading(false);
       }
     };
 
@@ -76,6 +83,10 @@ const Post = ({
   const handleNewCommentClick = () => {
     setIsNewComment(true);
   };
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>

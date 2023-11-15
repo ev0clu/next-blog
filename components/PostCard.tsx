@@ -12,16 +12,19 @@ import { useSession } from 'next-auth/react';
 import ErrorMessage from './ErrorMessage';
 import { format } from 'date-fns';
 import getNumberOfComments from '@/lib/getNumberOfComments';
+import Loading from './Loading';
 
 const PostCard = () => {
   const { theme } = useContext(ThemeContext);
   const [posts, setPosts] = useState<PostProps[]>([]);
   const [error, setError] = useState('');
   const { data: session } = useSession();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const response = await fetch('/api/post', {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
@@ -30,16 +33,23 @@ const PostCard = () => {
         if (response.ok) {
           const data = await response.json();
           setPosts(data.posts);
+          setIsLoading(false);
         } else {
           setError('An unexpected error occurred');
+          setIsLoading(false);
         }
       } catch (error) {
         setError('An unexpected error is occured');
+        setIsLoading(false);
       }
     };
 
     fetchData();
   }, []);
+
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <>
