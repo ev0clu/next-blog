@@ -1,5 +1,5 @@
 export { default } from 'next-auth/middleware';
 
 export const config = {
-  matcher: ['/profile', '/admin', '/post/new']
+  matcher: ['/profile', '/admin', '/post/new', '/post/:path*/update']
 };
