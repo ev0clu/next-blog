@@ -39,7 +39,7 @@ const formSchema = z.object({
 
 type formType = z.infer<typeof formSchema>;
 
-const NewPost = ({
+const UpdatePost = ({
   params
 }: {
   params: { id: string; title: string };
@@ -231,4 +231,4 @@ const NewPost = ({
   );
 };
 
-export default NewPost;
+export default UpdatePost;
