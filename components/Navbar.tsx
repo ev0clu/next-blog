@@ -47,9 +47,9 @@ const Navbar = () => {
               href="/login"
               className={`${
                 theme == 'light'
-                  ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
-                  : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
-              } rounded-full py-2`}
+                  ? 'bg-slate-900 text-slate-100 hover:bg-slate-600'
+                  : 'bg-slate-100 text-slate-900 hover:bg-slate-300'
+              } rounded-full px-4 py-2`}
             >
               Log in
             </Link>
@@ -57,9 +57,9 @@ const Navbar = () => {
               href="/register"
               className={`${
                 theme == 'light'
-                  ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
-                  : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
-              } rounded-full py-2`}
+                  ? 'bg-slate-900 text-slate-100 hover:bg-slate-600'
+                  : 'bg-slate-100 text-slate-900 hover:bg-slate-300'
+              } rounded-full px-4 py-2`}
             >
               Register
             </Link>
@@ -71,9 +71,9 @@ const Navbar = () => {
                 href="/post/new"
                 className={`${
                   theme == 'light'
-                    ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
-                    : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
-                } rounded-full py-2`}
+                    ? 'bg-slate-900 text-slate-100 hover:bg-slate-600'
+                    : 'bg-slate-100 text-slate-900 hover:bg-slate-300'
+                } rounded-full px-4 py-2`}
               >
                 Add new post
               </Link>
@@ -82,18 +82,18 @@ const Navbar = () => {
               href="/profile"
               className={`${
                 theme == 'light'
-                  ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
-                  : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
-              } rounded-full py-2`}
+                  ? 'bg-slate-900 text-slate-100 hover:bg-slate-600'
+                  : 'bg-slate-100 text-slate-900 hover:bg-slate-300'
+              } rounded-full px-4 py-2`}
             >
               Profile
             </Link>
             <button
               className={`${
                 theme == 'light'
-                  ? 'bg-slate-900 px-4 text-slate-100 hover:bg-slate-600'
-                  : 'bg-slate-100 px-4 text-slate-900 hover:bg-slate-300'
-              } rounded-full py-2`}
+                  ? 'bg-slate-900 text-slate-100 hover:bg-slate-600'
+                  : 'bg-slate-100 text-slate-900 hover:bg-slate-300'
+              } rounded-full px-4 py-2`}
               type="button"
               onClick={async () => {
                 await signOut({
