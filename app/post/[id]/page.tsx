@@ -1,13 +1,14 @@
 'use client';
 
-import { BiMessageRounded } from 'react-icons/bi';
-import { AiOutlineEye } from 'react-icons/ai';
-import { useContext, useEffect, useState } from 'react';
-import { ThemeContext } from '@/context/ThemeContext';
-import { PostProps } from '@/types/post';
-import Markdown from 'react-markdown';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useContext, useEffect, useState } from 'react';
+import { ThemeContext } from '@/context/ThemeContext';
+import { BiMessageRounded } from 'react-icons/bi';
+import { AiOutlineEye } from 'react-icons/ai';
+import { MdDelete, MdEdit } from 'react-icons/md';
+import { PostProps } from '@/types/post';
+import Markdown from 'react-markdown';
 import { format } from 'date-fns';
 import NewComment from '@/components/NewComment';
 import PostComments from '@/components/PostComments';
@@ -42,8 +43,8 @@ const Post = ({
           setError(
             `An unexpected error occurred. Error:${res.message}`
           );
-          setIsLoading(false);
         }
+        setIsLoading(false);
       } catch (error) {
         setError('An unexpected error is occured');
         setIsLoading(false);
@@ -131,14 +132,38 @@ const Post = ({
                 {post.content}
               </Markdown>
             </div>
-            <div className="flex flex-row items-center justify-end gap-4 pr-3 pt-3">
-              <div className="flex flex-row items-center gap-1 opacity-70">
-                <BiMessageRounded />
-                {getNumberOfComments(post.comments)}
-              </div>
-              <div className="flex flex-row items-center gap-1 opacity-70">
-                <AiOutlineEye />
-                {post.views}
+            <div
+              className={`${
+                session?.user && session?.user.role === 'ADMIN'
+                  ? 'justify-between'
+                  : 'justify-end'
+              } flex flex-row items-center gap-4 px-5 py-3`}
+            >
+              {session?.user && session?.user.role === 'ADMIN' && (
+                <div className="flex flex-row items-center gap-2">
+                  <Link
+                    href={`/post/${id}/delete`}
+                    className="hover:opacity-70"
+                  >
+                    <MdDelete />
+                  </Link>
+                  <Link
+                    href={`/post/${id}/update`}
+                    className="hover:opacity-70"
+                  >
+                    <MdEdit />
+                  </Link>
+                </div>
+              )}
+              <div className="flex flex-row items-center gap-1">
+                <div className="flex flex-row items-center gap-1 opacity-70">
+                  <BiMessageRounded />
+                  {getNumberOfComments(post.comments)}
+                </div>
+                <div className="flex flex-row items-center gap-1 opacity-70">
+                  <AiOutlineEye />
+                  {post.views}
+                </div>
               </div>
             </div>
           </div>
