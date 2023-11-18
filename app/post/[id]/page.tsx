@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '@/context/ThemeContext';
 import { BiMessageRounded } from 'react-icons/bi';
@@ -15,7 +16,6 @@ import PostComments from '@/components/PostComments';
 import ErrorMessage from '@/components/ErrorMessage';
 import getNumberOfComments from '@/lib/getNumberOfComments';
 import Loading from '@/components/Loading';
-import { useRouter } from 'next/navigation';
 import Spinner from '@/components/Spinner';
 
 const Post = ({
@@ -87,7 +87,7 @@ const Post = ({
     }
   }, [isNewComment]);
 
-  const handleNewCommentClick = () => {
+  const handleCommentRefreshClick = () => {
     setIsNewComment(true);
   };
 
@@ -212,13 +212,18 @@ const Post = ({
               <div>
                 <NewComment
                   postId={params.id}
-                  handleNewCommentClick={handleNewCommentClick}
+                  handleCommentRefreshClick={
+                    handleCommentRefreshClick
+                  }
                 />
               </div>
             )}
             <div>
               <p className="text-xl font-bold underline">Comments</p>
-              <PostComments comments={post.comments} />
+              <PostComments
+                comments={post.comments}
+                handleCommentRefreshClick={handleCommentRefreshClick}
+              />
             </div>
           </div>
           {deletePopup && (

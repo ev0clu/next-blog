@@ -17,10 +17,10 @@ type formType = z.infer<typeof formSchema>;
 
 interface Props {
   postId: string;
-  handleNewCommentClick: () => void;
+  handleCommentRefreshClick: () => void;
 }
 
-const Comment = ({ postId, handleNewCommentClick }: Props) => {
+const Comment = ({ postId, handleCommentRefreshClick }: Props) => {
   const { theme } = useContext(ThemeContext);
   const [error, setError] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
@@ -55,7 +55,7 @@ const Comment = ({ postId, handleNewCommentClick }: Props) => {
       if (response.ok) {
         setError('');
         setSubmitting(false);
-        handleNewCommentClick();
+        handleCommentRefreshClick();
         reset({
           comment: ''
         });
