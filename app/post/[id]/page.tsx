@@ -228,7 +228,7 @@ const Post = ({
           </div>
           {deletePopup && (
             <div className="absolute left-0 top-0 flex h-full w-screen items-center justify-center bg-zinc-600 bg-opacity-70">
-              <div className="w-80 rounded-lg bg-white p-5 text-slate-900">
+              <div className="fixed top-1/2 w-80 -translate-y-1/2 transform rounded-lg bg-white p-5 text-slate-900">
                 <p>
                   {`Are you sure you want to delete this post? You can't
                 undo this.`}
