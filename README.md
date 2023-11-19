@@ -1,6 +1,6 @@
 # **Next.js Blog**
 
-A basic blog app has built with Next.js framework. The app allows users to log in in order to comments under the posts and search for a specific post.
+A basic blog app has built with Next.js framework. The app allows users to log in in order to write comments under any posts.
 
 ### Demo: [Link]()
 
@@ -8,7 +8,7 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 
 1. Clone the repository
 2. Run `npm install` command in your terminal
-3. Create .env file and add a new enviromental variable named DATABASE_URL with your own MongoDB connection link and also add NEXTAUTH_SECRET variable with open ssl key.
+3. Create .env file and add a new enviromental variable named DATABASE_URL with your own MongoDB connection link, add NEXTAUTH_SECRET variable with open ssl key and also add CODE="3.1415" variable
 4. Run `npm run dev` command in your terminal
 5. Server running at `http://localhost:3000/`
 
@@ -17,6 +17,9 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 - Allow user to register, log in and log out
 - Only logged in users have rights to write comments
 - Only users with admin rights can create a new post
+- User with admin rights can remove/update posts and comments
+- User without admin rigths can remove/update comments which have written by himself/herself
+- Posts and comments update date has shown
 - Next.js used for CSR and SSR
 - MongoDB used to store users, posts and comments informations
 - Prisma ORM is used
@@ -64,4 +67,6 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 
 ### Layout
 
-![layout picture](https://github.com/ev0clu/next-blog/blob/main/layout.png?raw=true)
+![layout1 picture](https://github.com/ev0clu/next-blog/blob/main/layout1.png?raw=true)
+![layout2 picture](https://github.com/ev0clu/next-blog/blob/main/layout2.png?raw=true)
+![layout3 picture](https://github.com/ev0clu/next-blog/blob/main/layout3.png?raw=true)
