@@ -49,8 +49,8 @@ const Post = ({
           setError(
             `An unexpected error occurred. Error:${res.message}`
           );
+          setIsLoading(false);
         }
-        setIsLoading(false);
       } catch (error) {
         setError('An unexpected error is occured');
         setIsLoading(false);
