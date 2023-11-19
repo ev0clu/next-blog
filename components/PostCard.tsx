@@ -4,7 +4,7 @@ import { BiMessageRounded } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '@/context/ThemeContext';
-import { PostProps } from '@/types/post';
+import { PostProps } from '@/types/blog';
 import Markdown from 'react-markdown';
 import { IoIosAddCircle } from 'react-icons/io';
 import Link from 'next/link';

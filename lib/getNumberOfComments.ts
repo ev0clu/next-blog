@@ -1,4 +1,4 @@
-import { CommentProps } from '@/types/post';
+import { CommentProps } from '@/types/blog';
 
 const getNumberOfComments = (array: CommentProps[]) => {
   const length = array.length;
