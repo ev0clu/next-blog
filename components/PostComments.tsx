@@ -90,31 +90,31 @@ const PostComments = ({
                         'hh:mmaaa MMM do, yyyy'
                       )}
                     </div>
-                    {(session?.user &&
-                      session?.user.role === 'ADMIN') ||
-                      (session?.user.email ===
-                        comment.author.email && (
-                        <div className="flex flex-row items-center gap-2">
-                          <button
-                            className="hover:opacity-70"
-                            onClick={() => {
-                              handleDeletePopup();
-                              setCommentId(comment.id);
-                            }}
-                          >
-                            <MdDelete />
-                          </button>
-                          <button
-                            className="hover:opacity-70"
-                            onClick={() => {
-                              handleEditClick();
-                              setCommentId(comment.id);
-                            }}
-                          >
-                            <MdEdit />
-                          </button>
-                        </div>
-                      ))}
+                    {session?.user.role === 'ADMIN' ||
+                    session?.user.email === comment.author.email ? (
+                      <div className="flex flex-row items-center gap-2">
+                        <button
+                          className="hover:opacity-70"
+                          onClick={() => {
+                            handleDeletePopup();
+                            setCommentId(comment.id);
+                          }}
+                        >
+                          <MdDelete />
+                        </button>
+                        <button
+                          className="hover:opacity-70"
+                          onClick={() => {
+                            handleEditClick();
+                            setCommentId(comment.id);
+                          }}
+                        >
+                          <MdEdit />
+                        </button>
+                      </div>
+                    ) : (
+                      ''
+                    )}
                   </div>
                   {isEdit && commentId === comment.id ? (
                     <EditComment
