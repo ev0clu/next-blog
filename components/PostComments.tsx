@@ -6,6 +6,7 @@ import { CommentProps } from '@/types/post';
 import { format } from 'date-fns';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import Spinner from './Spinner';
+import EditComment from './EditComment';
 
 interface Props {
   comments: CommentProps[];
@@ -19,7 +20,7 @@ const PostComments = ({
   const [error, setError] = useState('');
   const { data: session } = useSession();
   const [deletePopup, setDeletePopup] = useState(false);
-  const [edit, setEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
   const [commentId, setCommentId] = useState('');
 
@@ -57,7 +58,11 @@ const PostComments = ({
   };
 
   const handleEditClick = () => {
-    setEdit(true);
+    setIsEdit(true);
+  };
+
+  const handleCancelCommentUpdateClick = () => {
+    setIsEdit(false);
   };
 
   return (
@@ -101,14 +106,32 @@ const PostComments = ({
                           </button>
                           <button
                             className="hover:opacity-70"
-                            onClick={handleEditClick}
+                            onClick={() => {
+                              handleEditClick();
+                              setCommentId(comment.id);
+                            }}
                           >
                             <MdEdit />
                           </button>
                         </div>
                       ))}
                   </div>
-                  <div className="font-light">{comment.content}</div>
+                  {isEdit && commentId === comment.id ? (
+                    <EditComment
+                      commentId={commentId}
+                      commentContent={comment.content}
+                      handleCommentRefreshClick={
+                        handleCommentRefreshClick
+                      }
+                      handleCancelCommentUpdateClick={
+                        handleCancelCommentUpdateClick
+                      }
+                    />
+                  ) : (
+                    <div className="font-light">
+                      {comment.content}
+                    </div>
+                  )}
                 </div>
               );
             })}
