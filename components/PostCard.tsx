@@ -94,7 +94,7 @@ const PostCard = () => {
                       {post.title}
                     </Link>
                     <Markdown
-                      className={`prose prose-code:text-blue-300 ${
+                      className={`prose prose-a:text-sky-500 prose-code:text-blue-300 ${
                         theme == 'light'
                           ? 'text-slate-900 prose-headings:text-slate-900 prose-p:text-slate-900 prose-blockquote:text-slate-900 prose-strong:text-slate-900 prose-ol:text-slate-900 prose-ul:text-slate-900 prose-li:text-slate-900'
                           : 'text-slate-100 prose-headings:text-slate-100 prose-p:text-slate-100 prose-blockquote:text-slate-100 prose-strong:text-slate-100 prose-ol:text-slate-100 prose-ul:text-slate-100 prose-li:text-slate-100'

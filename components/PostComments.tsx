@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import { CommentProps } from '@/types/post';
+import { CommentProps } from '@/types/blog';
 import { format } from 'date-fns';
 import { MdDelete, MdEdit } from 'react-icons/md';
 import Spinner from './Spinner';
@@ -128,9 +128,20 @@ const PostComments = ({
                       }
                     />
                   ) : (
-                    <div className="font-light">
-                      {comment.content}
-                    </div>
+                    <>
+                      <div className="font-light">
+                        {comment.content}
+                      </div>
+                      {comment.createdAt !== comment.modifiedAt && (
+                        <div className="text-right text-xs opacity-70">
+                          Updated at{' '}
+                          {format(
+                            new Date(comment.modifiedAt),
+                            'hh:mmaaa MMM do, yyyy'
+                          )}
+                        </div>
+                      )}
+                    </>
                   )}
                 </div>
               );

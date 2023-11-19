@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 /*import {
   SimpleMDEReactProps,
   SimpleMdeReact
@@ -191,7 +192,7 @@ const UpdatePost = ({
                     theme == 'light'
                       ? 'text-slate-900'
                       : 'text-slate-100'
-                  } prose prose-code:text-blue-500`}
+                  } prose prose-a:text-sky-500 prose-code:text-blue-500`}
                   options={contentEditorOptions}
                   {...field}
                   ref={null}
@@ -199,21 +200,33 @@ const UpdatePost = ({
               )}
             />
             <ErrorMessage>{errors.content?.message}</ErrorMessage>
-            <button
-              className={`${
-                theme === 'light'
-                  ? !isSubmitting
+            <div className="mt-2 flex flex-row items-center justify-center gap-4">
+              <Link
+                className={`${
+                  theme === 'light'
                     ? 'bg-slate-950 text-slate-100'
+                    : 'bg-slate-100 text-slate-950'
+                } flex flex-row items-center justify-center rounded p-2`}
+                href="/"
+              >
+                Cancel
+              </Link>
+              <button
+                className={`${
+                  theme === 'light'
+                    ? !isSubmitting
+                      ? 'bg-slate-950 text-slate-100'
+                      : 'bg-neutral-400 text-slate-950'
+                    : !isSubmitting
+                    ? 'bg-slate-100 text-slate-950'
                     : 'bg-neutral-400 text-slate-950'
-                  : !isSubmitting
-                  ? 'bg-slate-100 text-slate-950'
-                  : 'bg-neutral-400 text-slate-950'
-              } m-auto mt-2 flex flex-row items-center gap-2 rounded p-2`}
-              type="submit"
-              disabled={isSubmitting}
-            >
-              Create{isSubmitting && <Spinner />}
-            </button>
+                } flex flex-row items-center justify-center gap-2 rounded p-2`}
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Update{isSubmitting && <Spinner />}
+              </button>
+            </div>
           </form>
         </>
       ) : (

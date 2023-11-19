@@ -100,13 +100,9 @@ const EditComment = ({
           <button
             className={`${
               theme === 'light'
-                ? !isSubmitting
-                  ? 'bg-slate-950 text-slate-100'
-                  : 'bg-neutral-400 text-slate-950'
-                : !isSubmitting
-                ? 'bg-slate-100 text-slate-950'
-                : 'bg-neutral-400 text-slate-950'
-            } flex flex-row items-center justify-center gap-2 rounded p-2`}
+                ? 'bg-slate-950 text-slate-100'
+                : 'bg-slate-100 text-slate-950'
+            } flex flex-row items-center justify-center rounded p-2`}
             type="button"
             onClick={handleCancelCommentUpdateClick}
           >

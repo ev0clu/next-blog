@@ -135,7 +135,7 @@ const NewPost = () => {
                     theme == 'light'
                       ? 'text-slate-900'
                       : 'text-slate-100'
-                  } prose prose-code:text-blue-500`}
+                  } prose prose-a:text-sky-500 prose-code:text-blue-500`}
                   options={descriptionEditorOptions}
                   {...field}
                   ref={null}

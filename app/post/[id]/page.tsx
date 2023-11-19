@@ -8,7 +8,7 @@ import { ThemeContext } from '@/context/ThemeContext';
 import { BiMessageRounded } from 'react-icons/bi';
 import { AiOutlineEye } from 'react-icons/ai';
 import { MdDelete, MdEdit } from 'react-icons/md';
-import { PostProps } from '@/types/post';
+import { PostProps } from '@/types/blog';
 import Markdown from 'react-markdown';
 import { format } from 'date-fns';
 import NewComment from '@/components/NewComment';
@@ -164,7 +164,7 @@ const Post = ({
                   {post.description}
                 </Markdown>
                 <Markdown
-                  className={`prose prose-code:text-blue-300 ${
+                  className={`prose prose-a:text-sky-500 prose-code:text-blue-300 ${
                     theme == 'light'
                       ? 'text-slate-900 prose-headings:text-slate-900 prose-p:text-slate-900 prose-blockquote:text-slate-900 prose-strong:text-slate-900 prose-ol:text-slate-900 prose-ul:text-slate-900 prose-li:text-slate-900'
                       : 'text-slate-100 prose-headings:text-slate-100 prose-p:text-slate-100 prose-blockquote:text-slate-100 prose-strong:text-slate-100 prose-ol:text-slate-100 prose-ul:text-slate-100 prose-li:text-slate-100'
@@ -207,6 +207,15 @@ const Post = ({
                   </div>
                 </div>
               </div>
+              {post.createdAt !== post.modifiedAt && (
+                <div className="pb-2 pr-5 text-right text-xs opacity-70">
+                  Updated at{' '}
+                  {format(
+                    new Date(post.modifiedAt),
+                    'hh:mmaaa MMM do, yyyy'
+                  )}
+                </div>
+              )}
             </div>
             {session?.user && (
               <div>
