@@ -29,7 +29,6 @@ const Comment = ({ postId, handleCommentRefreshClick }: Props) => {
   const {
     register,
     handleSubmit,
-    control,
     reset,
     formState: { errors }
   } = useForm<formType>({
@@ -88,6 +87,9 @@ const Comment = ({ postId, handleCommentRefreshClick }: Props) => {
           placeholder="Type comment..."
           {...register('comment')}
         />
+        {errors && (
+          <ErrorMessage>{errors.comment?.message}</ErrorMessage>
+        )}
         <button
           className={`${
             theme === 'light'
