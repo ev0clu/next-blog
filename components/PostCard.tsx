@@ -33,11 +33,10 @@ const PostCard = () => {
         if (response.ok) {
           const data = await response.json();
           setPosts(data.posts);
-          setIsLoading(false);
         } else {
           setError('An unexpected error occurred');
-          setIsLoading(false);
         }
+        setIsLoading(false);
       } catch (error) {
         setError('An unexpected error is occured');
         setIsLoading(false);
