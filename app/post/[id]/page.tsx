@@ -58,6 +58,7 @@ const Post = ({
     };
 
     fetchDataUpdate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -85,6 +86,7 @@ const Post = ({
       fetchData();
       setIsNewComment(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNewComment]);
 
   const handleCommentRefreshClick = () => {
