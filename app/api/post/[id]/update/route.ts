@@ -33,7 +33,8 @@ export async function PUT(
       data: {
         title: body.title,
         description: body.description,
-        content: body.content
+        content: body.content,
+        modifiedAt: new Date()
       }
     });
 

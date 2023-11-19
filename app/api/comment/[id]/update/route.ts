@@ -21,7 +21,8 @@ export async function PUT(
     const updateComment = await prisma.comment.update({
       where: { id: params.id },
       data: {
-        content: body.comment
+        content: body.comment,
+        modifiedAt: new Date()
       }
     });
 
