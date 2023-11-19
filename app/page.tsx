@@ -1,5 +1,5 @@
 import PostCard from '@/components/PostCard';
 
-export default async function Home() {
+export default function Home() {
   return <PostCard />;
 }
