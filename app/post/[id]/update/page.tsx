@@ -71,7 +71,7 @@ const UpdatePost = ({
   const descriptionEditorOptions = useMemo(() => {
     return {
       placeholder: 'Description',
-      hideIcons: ['fullscreen'],
+      hideIcons: ['fullscreen', 'image'],
       sideBySideFullscreen: false
     } as SimpleMDEReactProps;
   }, []);
