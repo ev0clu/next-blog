@@ -18,7 +18,7 @@ export type PostProps = {
   views: number;
   author: UserProps;
   createdAt: string;
-  updatedAt: string;
+  modifiedAt: string;
 };
 
 export type CommentProps = {
@@ -27,6 +27,6 @@ export type CommentProps = {
   content: string;
   author: UserProps;
   createdAt: string;
-  updatedAt: string;
+  modifiedAt: string;
   post: PostProps;
 };
