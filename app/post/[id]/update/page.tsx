@@ -109,8 +109,7 @@ const UpdatePost = ({
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setValue, id]);
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {

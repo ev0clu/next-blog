@@ -25,13 +25,14 @@ const Post = ({
 }) => {
   const { theme } = useContext(ThemeContext);
   const [post, setPost] = useState<PostProps>();
-  const [isNewComment, setIsNewComment] = useState(true);
+  const [isNewComment, setIsNewComment] = useState(false);
   const [error, setError] = useState('');
   const { data: session } = useSession();
   const { id } = params;
   const [isLoading, setIsLoading] = useState(true);
   const [deletePopup, setDeletePopup] = useState(false);
   const [isSubmitting, setSubmitting] = useState(false);
+  const [isViewsUpdated, setIsViewsUpdated] = useState(false);
 
   const router = useRouter();
 
@@ -51,6 +52,7 @@ const Post = ({
           );
           setIsLoading(false);
         }
+        setIsViewsUpdated(true);
       } catch (error) {
         setError('An unexpected error is occured');
         setIsLoading(false);
@@ -58,8 +60,7 @@ const Post = ({
     };
 
     fetchDataUpdate();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -82,12 +83,12 @@ const Post = ({
       }
     };
 
-    if (isNewComment) {
+    if (isNewComment || isViewsUpdated) {
       fetchData();
       setIsNewComment(false);
+      setIsViewsUpdated(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isNewComment]);
+  }, [isNewComment, id, isViewsUpdated]);
 
   const handleCommentRefreshClick = () => {
     setIsNewComment(true);
