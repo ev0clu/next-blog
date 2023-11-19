@@ -55,6 +55,7 @@ model User {
 model Post {
   id          String    @id @default(cuid()) @map("_id")
   createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
   title       String
   description String
   content     String
@@ -67,6 +68,7 @@ model Post {
 model Comment {
   id        String   @id @default(cuid()) @map("_id")
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   content   String
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
