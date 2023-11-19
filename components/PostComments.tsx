@@ -82,13 +82,15 @@ const PostComments = ({
                   className="flex max-w-2xl flex-col"
                   key={comment.id}
                 >
-                  <div className="flex flex-row gap-2">
-                    <b> {comment.author.username}</b>
-                    <div className="opacity-50">
-                      {format(
-                        new Date(comment.createdAt),
-                        'hh:mmaaa MMM do, yyyy'
-                      )}
+                  <div className="flex flex-row justify-between gap-2">
+                    <div className="flex flex-row gap-2">
+                      <b> {comment.author.username}</b>
+                      <div className="opacity-50">
+                        {format(
+                          new Date(comment.createdAt),
+                          'hh:mmaaa MMM do, yyyy'
+                        )}
+                      </div>
                     </div>
                     {session?.user.role === 'ADMIN' ||
                     session?.user.email === comment.author.email ? (
