@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import prisma from '@/prisma/client';
 
-export async function POST(req: Request) {
+export const revalidate = 0;
+
+export async function GET(req: Request) {
   try {
     const posts = await prisma.post.findMany({
       include: { author: true, comments: true }
