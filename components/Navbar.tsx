@@ -44,6 +44,7 @@ const Navbar = () => {
         {!session?.user ? (
           <>
             <Link
+              rel="preload"
               href="/login"
               className={`${
                 theme == 'light'
@@ -54,6 +55,7 @@ const Navbar = () => {
               Log in
             </Link>
             <Link
+              rel="preload"
               href="/register"
               className={`${
                 theme == 'light'
@@ -68,6 +70,7 @@ const Navbar = () => {
           <>
             {session.user.role === 'ADMIN' && (
               <Link
+                rel="preload"
                 href="/post/new"
                 className={`${
                   theme == 'light'
@@ -79,6 +82,7 @@ const Navbar = () => {
               </Link>
             )}
             <Link
+              rel="preload"
               href="/profile"
               className={`${
                 theme == 'light'
