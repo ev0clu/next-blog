@@ -2,15 +2,16 @@
 
 A basic blog app has built with Next.js framework. The app allows users to log in in order to write comments under any posts.
 
-### Demo: [Link]()
+### Demo: [Link](https://next-blog-eight-azure.vercel.app/)
 
 ## How run from local repository
 
 1. Clone the repository
 2. Run `npm install` command in your terminal
 3. Create .env file and add a new enviromental variable named DATABASE_URL with your own MongoDB connection link, add NEXTAUTH_SECRET variable with open ssl key and also add CODE="3.1415" variable
-4. Run `npm run dev` command in your terminal
-5. Server running at `http://localhost:3000/`
+4. Run `npx prisma generate`
+5. Run `npm run dev` command in your terminal
+6. Server running at `http://localhost:3000/`
 
 ## Features
 
