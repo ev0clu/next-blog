@@ -31,7 +31,6 @@ const EditComment = ({
   const { theme } = useContext(ThemeContext);
   const [error, setError] = useState('');
   const [isSubmitting, setSubmitting] = useState(false);
-  const { data: session } = useSession();
 
   const {
     register,
@@ -121,7 +120,7 @@ const EditComment = ({
             type="submit"
             disabled={isSubmitting}
           >
-            Send {isSubmitting && <Spinner />}
+            Update {isSubmitting && <Spinner />}
           </button>
         </div>
       </form>
