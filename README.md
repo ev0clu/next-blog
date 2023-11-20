@@ -40,8 +40,9 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 - Markdown editor needed to run in `use client` mode and need to be imported in dynamic to avoid navigator is not defined error:
   - [Stackoverflow](https://stackoverflow.com/questions/77301109/next-navigation-giving-error-navigator-is-not-defined)
   - [GitHub](https://github.com/RIP21/react-simplemde-editor/issues/30)
-- SimpleMDE Options:
-  - [GitHub](https://github.com/Ionaru/easy-markdown-editor#configuration)
+- SimpleMDE usage, options:
+  - [Usage: GitHub](https://github.com/Ionaru/easy-markdown-editor#configuration)
+  - [Options: Github](https://github.com/RIP21/react-simplemde-editor)
 - React Hook Form usage with UI component needs to has `ref={null}` property to avoid ref warning:
   - [Stackoverflow](https://stackoverflow.com/questions/67877887/react-hook-form-v7-function-components-cannot-be-given-refs-attempts-to-access)
   - [GitHub](https://github.com/react-hook-form/react-hook-form/issues/3411)
