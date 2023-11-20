@@ -26,7 +26,7 @@ const PostCard = () => {
       try {
         setIsLoading(true);
         const response = await fetch('/api/post', {
-          method: 'GET',
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
