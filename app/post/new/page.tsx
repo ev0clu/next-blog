@@ -131,6 +131,7 @@ const NewPost = () => {
               control={control}
               render={({ field }) => (
                 <SimpleMdeReact
+                  rel="prefetch"
                   className={`${
                     theme == 'light'
                       ? 'text-slate-900'
@@ -148,6 +149,7 @@ const NewPost = () => {
               control={control}
               render={({ field }) => (
                 <SimpleMdeReact
+                  rel="prefetch"
                   className={`${
                     theme == 'light'
                       ? 'text-slate-900'
