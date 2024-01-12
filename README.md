@@ -8,10 +8,15 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 
 1. Clone the repository
 2. Run `npm install` command in your terminal
-3. Create .env file and add a new enviromental variable named DATABASE_URL with your own MongoDB connection link, add NEXTAUTH_SECRET variable with open ssl key and also add CODE="3.1415" variable
-4. Run `npx prisma generate`
-5. Run `npm run dev` command in your terminal
-6. Server running at `http://localhost:3000/`
+3. Set up MongoDB database
+   Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET
+4. Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET<br>
+   `DATABASE_URL="your-mongodb-connection-link"`<br>
+   `NEXTAUTH_SECRET="open-ssl-generated-key"`<br>
+   `CODE="3.1415"`
+5. Run `npx prisma generate`
+6. Run `npm run dev` command in your terminal
+7. Server running at `http://localhost:3000/`
 
 ## Features
 
