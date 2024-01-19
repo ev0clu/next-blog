@@ -4,20 +4,6 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 
 ### Demo: [Link](https://next-blog-eight-azure.vercel.app/)
 
-## How run from local repository
-
-1. Clone the repository
-2. Run `npm install` command in your terminal
-3. Set up MongoDB database
-   Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET
-4. Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET<br>
-   `DATABASE_URL="your-mongodb-connection-link"`<br>
-   `NEXTAUTH_SECRET="open-ssl-generated-key"`<br>
-   `CODE="3.1415"`
-5. Run `npx prisma generate`
-6. Run `npm run dev` command in your terminal
-7. Server running at `http://localhost:3000/`
-
 ## Features
 
 - Allow user to register, log in and log out
@@ -34,6 +20,20 @@ A basic blog app has built with Next.js framework. The app allows users to log i
 - Render-as-you-fetch approach is used for Loading screen
 - Hosted on Vercel
 - Responsive design
+
+## How to run from local repository
+
+1. Clone the repository
+2. Run `npm install` command in your terminal
+3. Set up MongoDB database
+   Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET
+4. Create .env file and add enviromental variables: open ssl key should generate to NEXTAUTH_SECRET<br>
+   `DATABASE_URL="your-mongodb-connection-link"`<br>
+   `NEXTAUTH_SECRET="open-ssl-generated-key"`<br>
+   `CODE="3.1415"`
+5. Run `npx prisma generate`
+6. Run `npm run dev` command in your terminal
+7. Server running at `http://localhost:3000/`
 
 ### Useful links and informations
 
